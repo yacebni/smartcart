@@ -8,15 +8,15 @@ Le projet se trouve dans la branche master, il faudra donc s'assurer d'être dan
 
 Pour installer et exécuter ce projet localement, suivez les étapes ci-dessous :
 
-1. Clonez ce dépôt dans www (Windows ou Linux) ou htdocs (Mac) sur votre machine locale en vous plaçant dans la branche master :
+1. Clonez ce dépôt dans www (Windows ou Linux) ou htdocs (Mac) sur votre machine locale :
 
    ```bash
-   git clone -b master https://forge.univ-lyon1.fr/p2202669/liste-de-course-php.git
+   git clone https://github.com/yacebni/smartcart.git
 
 2. Accédez au répertoire du projet :
 
     ```bash
-    cd liste-de-course-php
+    cd smartcart
 
 3. Installez les dépendances PHP avec Composer :
     ```bash
@@ -74,7 +74,7 @@ Pour accéder à l'interface d'administration, vous pouvez utiliser les informat
 ## Réalisateurs
 
 Ce projet a été réalisé par un groupe d'étudiants du BUT Informatique de l'IUT Lyon 1 :
-- Redouane **AZIZI**
-- Gatta **BA**
+- Redouane **AZIZI** 
+- Gatta **BA** @gattacode
 - Yacine **BOUANANI**
 - Jules **VIC**
