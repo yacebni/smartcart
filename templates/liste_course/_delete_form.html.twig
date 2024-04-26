@@ -1,0 +1,4 @@
+<form class="rounded-xl border border-red-600 mt-8 text-red-600 font-bold px-3 py-2 hover:opacity-70 duration-300 inline-block" method="post" action="{{ path('app_liste_course_delete', {'id': liste_course.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la liste?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ liste_course.id) }}">
+    <button class="btn">Supprimer la liste</button>
+</form>

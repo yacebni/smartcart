@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+<div class="flex flex-col items-center space-y-4">
+	<div class="[&>*]:space-y-2 [&>*]:w-full [&>*>div]:flex [&>*>div]:flex-col [&>*]:flex-col [&>*>select]:w-full [&>*>*>select]:rounded  [&>*>*>select]:border [&>*>*>select]:border-gray-200 [&>*>*>select]:text-center [&>*>*>select:focus]:outline-none [&>*>input]:w-full [&>*>*>input]:rounded  [&>*>*>input]:border [&>*>*>input]:border-gray-200 [&>*>*>input]:px-4 [&>*>*>input]:py-2 [&>*>*>input:focus]:outline-none">
+		{{ form_widget(form) }}
+	</div>
+	<div class="inline-block">
+		<button class="mb-6 rounded bg-[#8FB9EB] text-white font-bold px-6 py-2 hover:opacity-70 duration-300">{{ button_label|default("Ajouter l'article") }}</button>
+	</div>
+</div>
+{{ form_end(form) }}

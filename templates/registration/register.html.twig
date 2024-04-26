@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire
+{% endblock %}
+
+{% block body %}
+	<div method="post" class="h-[80vh]">
+		<div class="flex items-center space-x-4 p-4 justify-between">
+			<a href="/liste/course" class="flex items-center space-x-4 p-4">
+				<img class="w-20 h-20" src="{{ asset('/images/logo.png') }}" alt="logo"/>
+				<div>
+					<span class="text-black text-4xl font-light">Smart</span>
+					<span class="text-black text-4xl font-medium">Cart</span>
+				</div>
+			</a>
+            <a href="/">
+			<img class="w-16 h-16" src="{{ asset('/images/utilisateur.png') }}" alt="logo"/>
+            </a>
+		</div>
+		<div class="flex flex-col w-full items-center justify-center px-36 h-full">
+
+			<p class="text-black font-bold text-4xl mb-8">S'inscrire</p>
+			<div class="w-full [&>*]:w-full [&>*]:flex [&>*]:flex-col [&>*]:space-y-6 [&>*]:text-2xl">
+				{{ form_errors(registrationForm) }}
+
+				{{ form_start(registrationForm) }}
+				<div class="[&>*]:w-full [&>*>input]:w-full [&>*>input]:rounded  [&>*>input]:border [&>*>input]:border-gray-200 [&>*>input]:px-4 [&>*>input]:py-2 [&>*>input:focus]:outline-none">
+					{{ form_row(registrationForm.pseudo) }}
+				</div>
+				<div class="[&>*]:w-full [&>*>input]:w-full [&>*>input]:rounded  [&>*>input]:border [&>*>input]:border-gray-200 [&>*>input]:px-4 [&>*>input]:py-2 [&>*>input:focus]:outline-none">
+					{{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}</div>
+			</div>
+			<div class="[&>*]:flex [&>*]:space-x-4 text-lg py-4">
+				{{ form_row(registrationForm.agreeTerms, {
+                    label: 'Accepter les termes'
+                }) }}
+			</div>
+			<div class="flex w-full items-center gap-3 justify-end">
+
+				<button type="submit" class="rounded bg-[#8FB9EB] text-2xl text-white font-bold px-6 py-2 hover:opacity-70 duration-300">S'inscrire</button>
+				{{ form_end(registrationForm) }}
+				<a class="underline text-2xl" href="{{ path('app_login')}}">Se connecter<a/>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

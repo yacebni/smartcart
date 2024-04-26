@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ArticlePrevu{% endblock %}
+
+{% block body %}
+    <div class="h-[80vh]">
+
+		<div class="flex items-center space-x-4 p-4 justify-between">
+			<a href="/liste/course" class="flex items-center space-x-4 p-4">
+				<img class="w-20 h-20" src="{{ asset('/images/logo.png') }}" alt="logo"/>
+				<div>
+					<span class="text-black text-4xl font-light">Smart</span>
+					<span class="text-black text-4xl font-medium">Cart</span>
+				</div>
+			</a>
+            <a href="/">
+			<img class="w-16 h-16" src="{{ asset('/images/utilisateur.png') }}" alt="logo"/>
+            </a>
+		</div>
+		<div class="flex flex-col w-full items-center justify-center px-36 h-full">
+
+		<p class="text-black font-bold text-4xl mb-8">Créer un nouvel article</p>
+
+    {{ include('article_prevu/_form.html.twig') }}
+
+    <a href="{{ path('app_article_prevu_index') }}">back to list</a>
+	</div></div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+<div class="w-full flex flex-col justify-center mt-4 py-3 px-4 rounded-xl border space-y-6">
+	<p class="font-bold text-left">Ajouter un article</p>
+	<div class="[&>*]:space-y-2 [&>*]:w-full [&>*]:flex [&>*]:space-x-4 [&>*>div]:flex [&>*>div]:flex-col [&>*>select]:w-full [&>*>*>select]:rounded  [&>*>*>select]:border [&>*>*>select]:border-gray-200 [&>*>*>select]:text-center [&>*>*>select:focus]:outline-none [&>*>input]:w-full [&>*>*>input]:rounded  [&>*>*>input]:border [&>*>*>input]:border-gray-200 [&>*>*>input]:px-4 [&>*>*>input]:py-2 [&>*>*>input:focus]:outline-none">
+
+		{{ form_widget(form) }}</div>
+	<button class="rounded-xl mb-6 bg-[#8FB9EB] text-white font-bold px-3 py-2 hover:opacity-70 duration-300">{{ button_label|default("Ajouter l'article") }}</button>
+</div>
+{{ form_end(form) }}

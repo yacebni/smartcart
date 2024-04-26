@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListeCourse
+{% endblock %}
+
+{% block body %}
+	<div class="h-full">
+
+		<div class="flex items-center space-x-4 p-4 justify-between">
+			<a href="/liste/course" class="flex items-center space-x-4 p-4">
+				<img class="w-20 h-20" src="{{ asset('/images/logo.png') }}" alt="logo"/>
+				<div>
+					<span class="text-black text-4xl font-light">Smart</span>
+					<span class="text-black text-4xl font-medium">Cart</span>
+				</div>
+			</a>
+			<a href="/">
+				<img class="w-16 h-16" src="{{ asset('/images/utilisateur.png') }}" alt="logo"/>
+			</a>
+		</div>
+		<div class="flex flex-col w-full items-center justify-center px-36 h-full">
+			<div class="flex flex-row items-center justify-center mb-8 ">
+				<p class="text-black font-bold mr-4 text-4xl">{{ liste_course.nomListe }}</p>
+				<a class="flex items-center bg-[#8FB9EB] rounded-full px-3 py-3 shadow hover:opacity-50 duration-300" href="{{ path('app_liste_course_edit', {'id': liste_course.id}) }}"><img src="{{ asset('images/editer.png') }}" alt="Edit" class="w-6 h-6"></a>
+			</div>
+
+			<table class="table-auto text-xl border-separate border-spacing-y-2 ">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Qté</th>
+						<th>Nom</th>
+						<th>Prix unitaire</th>
+						<th>Prix total</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for info in articles_info %}
+						<tr class="text-lg [&>*]:py-3 [&>*]:mb-3 duration-200 bg-stone-100 hover:bg-stone-200 hover:shadow-md group rounded-md ring-1 ring-slate-200 shadow-md">
+							<td
+								class="my-auto pl-5">
+								{# Formulaire pour modifier le statut d'achat #}
+								<form id="purchase-status-form-{{ info.articleId }}" class="flex items-center h-full" method="post" action="{{ path('app_liste_course_toggle_purchase_status', {'id':liste_course.id, 'articleId': info.articleId}) }}">
+									<input class="w-5 h-5" type="checkbox" name="purchase_status" onchange="document.getElementById('purchase-status-form-{{ info.articleId }}').submit();" {% if info.statutAchat %} checked {% endif %}>
+									<input type="hidden" name="_token" value="{{ csrf_token('toggle_purchase_status' ~ info.articleId) }}">
+								</form>
+							</td>
+
+							<td class="text-center p-6">
+								{% if  info.image is not null %}
+									<img src={{ info.image }} alt="logo" class="w-24"/>
+								{% endif %}
+							</td>
+							<td class="text-center p-12 {{ info.statutAchat ? 'line-through' : '' }}">{{ info.quantite }}</td>
+							<td class="text-center p-12 {{ info.statutAchat ? 'line-through' : '' }}">
+								{{ info.nomArticle }}
+							</td>
+							<td class="text-center p-12 {{ info.statutAchat ? 'line-through' : '' }}">{{ info.prixUnitaire}}€</td>
+							<td class="text-center p-12 {{ info.statutAchat ? 'line-through' : '' }}">{{ info.prixTotal }}€</td>
+
+							<td class="p-8">
+								{# Formulaire pour supprimer l'article prévu, mais seulement s'il est défini #}
+								{% if info.articleId is not null %}
+									<form class="flex items-center" method="post" action="{{ path('app_article_prevu_delete', {'id': info.articleId}) }}" onsubmit="return confirm('Confirmer la suppression?');">
+										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ info.articleId) }}">
+										<button class="btn h-full"><img src="{{ asset('images/red_bin.png') }}" alt="Delete" class="w-8 h-auto mx-auto"></button>
+									</form>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<p class="my-2 text-xl font-semibold">Prix total de la liste :
+				<span class="text-[#8FB9EB]">{{ prix_total }}€</span>
+			</p>
+			{{ include('article_prevu/_form.html.twig') }}
+			<div class="flex flex-row space-x-4">
+				{{ include('liste_course/_delete_form.html.twig') }}
+				<a class="rounded-xl border border-[#8FB9EB] mt-8 text-[#8FB9EB] font-bold px-3 py-2 hover:opacity-70 duration-300" href="{{ path('app_liste_course_index') }}">Retour aux listes</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

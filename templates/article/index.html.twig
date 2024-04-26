@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles
+{% endblock %}
+
+{% block body %}
+	{% if app.user.userIdentifier == "Minh" %}
+		<div class="border  p-4 rounded-xl absolute top-6 left-1/2 transform -translate-x-1/2">
+			<p class="font-bold mb-3 text-center">Dashboard de
+				{{app.user.userIdentifier}}
+			</p>
+			<div class="flex space-x-4">
+				<a href="/admin/article/" class="rounded-xl border border-[#8FB9EB] text-[#8FB9EB] font-bold px-3 py-2 hover:opacity-70 duration-300">
+					Modifier les articles
+				</a>
+				<a href="/admin/type/article/" class="rounded-xl border border-[#8FB9EB] text-[#8FB9EB] font-bold px-3 py-2 hover:opacity-70 duration-300">
+					Modifier les types
+				</a>
+			</div>
+		</div>
+	{% endif %}
+	<div class="h-full">
+
+		<div class="flex items-center space-x-4 p-4 justify-between">
+			<a href="/liste/course" class="flex items-center space-x-4 p-4">
+				<img class="w-20 h-20" src="{{ asset('/images/logo.png') }}" alt="logo"/>
+				<div>
+					<span class="text-black text-4xl font-light">Smart</span>
+					<span class="text-black text-4xl font-medium">Cart</span>
+				</div>
+			</a>
+
+			<a href="/">
+				<img class="w-16 h-16" src="{{ asset('/images/utilisateur.png') }}" alt="logo"/>
+			</a>
+		</div>
+		<div class="flex flex-col w-full items-center justify-center px-36 h-full">
+
+			<p class="text-black font-bold text-4xl mb-8">Liste des articles</p>
+
+			<table class="table-auto mx-auto mt-8 ">
+				<thead class="">
+					<tr class="text-xl">
+						<th class="p-6">Nom de l'article</th>
+						<th>Prix</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for article in articles %}
+						<tr class="text-lg duration-200 group rounded-md ring-1 ring-slate-200 justify-center items-center">
+							<td class="p-6 ">{{ article.NomArticle }}</td>
+							<td class="p-6">{{ article.Prix }}</td>
+							<td class="p-6 flex items-center justify-between space-x-5">
+								<a class="rounded-full border border-[#8FB9EB] text-[#8FB9EB] font-bold px-3 py-3 hover:opacity-70 duration-300 hover:scale-125" href="{{ path('app_article_show', {'id': article.id}) }}"><img src="{{ asset('images/eye.png') }}" alt="Edit" class="w-6 h-6"></a>
+								<a class="flex items-center border-2 bg-[#8FB9EB] rounded-full px-3 py-3 mr-3 shadow hover:scale-125 duration-300" href="{{ path('app_article_edit', {'id': article.id}) }}"><img src="{{ asset('images/editer.png') }}" alt="Edit" class="w-6 h-6"></a>
+
+								<form class="" method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+									<button onclick="event.stopPropagation();" class="btn h-full w-12 mr-4"><img src="{{ asset('images/red_bin.png') }}" alt="Delete" class="w-full h-auto mx-auto hover:scale-125 duration-300"></button>
+								</form>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4" class="text-center text-red-600 py-6">Aucun article enregistré</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+			<a class="rounded bg-[#8FB9EB] text-xl text-white font-bold my-8 px-6 py-2 hover:opacity-70 duration-300" href="{{ path('app_article_new') }}">Créer un article</a>
+		</div>
+	</div>
+{% endblock %}
